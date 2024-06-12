@@ -3,6 +3,9 @@ console.log("JavaScript is connected");
 const theButtons = document.querySelectorAll("#buttonHolder img");
 
 const puzzleBoard = document.querySelector(".puzzle-board");
+const puzzlePieces = document.querySelectorAll(".puzzle-pieces img");
+const dropZones = document.querySelectorAll(".drop-zone");
+let dragPiece;
 
 //function
 function changeBGImage(event) {
@@ -17,6 +20,26 @@ function changeBGImage(event) {
   puzzleBoard.style.backgroundImage = `url('../images/backGround${event.currentTarget.id}.jpg')`;
 }
 
+function handlestartDrag() {
+  console.log("started dragging");
+  dragPiece = this;
+}
+
+function handleOver(e) {
+  console.log("dragging over dropZone");
+  e.preventDefault();
+}
+
+function dropped() {
+  console.log("Item was dropped");
+  this.appendChild(dragPiece);
+}
+
 //event
 
 theButtons.forEach((button) => button.addEventListener("click", changeBGImage));
+puzzlePieces.forEach((piece) =>
+  piece.addEventListener("dragstart", handlestartDrag)
+);
+dropZones.forEach((zone) => zone.addEventListener("dragover", handleOver));
+dropZones.forEach((zone) => zone.addEventListener("drop", dropped));
