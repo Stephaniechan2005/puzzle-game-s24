@@ -15,7 +15,7 @@ function changeBGImage(event) {
   //background-image: url('../images/backGround0.jpg');
   // puzzleBoard.style.backgroundImage = `url('../images/backGround${this.id}.jpg')`;
 
-  //Method 1
+  //Method 2
   console.log(event.currentTarget.id);
   puzzleBoard.style.backgroundImage = `url('../images/backGround${event.currentTarget.id}.jpg')`;
 }
@@ -31,7 +31,15 @@ function handleOver(e) {
 }
 
 function dropped() {
-  console.log("Item was dropped");
+  // Method 1 check is there any image before the first puzzle drop
+  // if (this.children.length < 1) {
+  // this.appendChild(dragPiece);
+  //}
+
+  //Method 2 check is there any image after the first puzzle drop
+  if (this.children.length >= 1) {
+    return;
+  }
   this.appendChild(dragPiece);
 }
 
